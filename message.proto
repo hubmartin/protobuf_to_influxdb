@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+message pb_device_t
+{
+    int32 hardware = 1;
+    int64 firmware = 2;
+}
+
+enum pb_co2_calibration_type_t
+{
+    CO2_CALIBRATION_NONE = 0;
+    CO2_CALIBRATION_FORCED_ABC = 1;
+    CO2_CALIBRATION_BACKGROUND = 2;
+    CO2_CALIBRATION_TARGET = 3;
+}
+
+message pb_co2_calibration_t
+{
+    pb_co2_calibration_type_t calibration_type = 1;
+    int32 calibration_target = 2;
+}
+
+message pb_event_t
+{
+    int32 event = 1;
+}
+
+message pb_battery_t
+{
+    int32 voltage1 = 1;
+    int32 voltage2 = 2;
+}
+
+message pb_packet_lora_t {
+    int32 sequence = 1;
+    pb_device_t device = 2;
+    pb_battery_t battery = 3;
+    int32 temperature = 4;
+    int32 humidity = 5;
+    int32 luminosity = 6;
+    int32 pir = 7;
+    int32 co2 = 8;
+    pb_co2_calibration_t co2_calibration = 9;
+}
+
+
+/*
+message Counter
+{
+    int32 timestamp = 1;
+    int32 timedelta = 2;
+    int32 counterbase = 3;
+    oneof increment
+    {
+     bytes increment_8b = 4;
+     bytes increment_16b = 5;
+    }
+}
+
+enum Contact
+{
+    UNKNOWN = 0;
+    CLOSED = 1;
+    OPENED = 2;
+}
+
+message Example {
+    Counter Counter1 = 1; // komentar
+    Counter Counter2 = 2;
+    Counter Counter3 = 3;
+    Counter Counter4 = 4;
+}
+*/
+// 0A0E08D209100A1864220501020304051200
+
+// 8b 0A2D08D209100A18642224000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F20212223
+// 16b  0A2D08D209100A18642A24000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F20212223
